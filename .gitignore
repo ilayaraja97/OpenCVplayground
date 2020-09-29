@@ -6,5 +6,6 @@ include
 *.jpeg
 *.jpg
 *.png
+*.mp4
 bin
 .ipynb_checkpoints
