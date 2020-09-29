@@ -1,0 +1,9 @@
+pyvenv.cfg
+share
+lib64
+lib
+include
+*.jpeg
+*.jpg
+*.png
+bin
