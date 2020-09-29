@@ -2,10 +2,12 @@
 import cv2 as cv
 import numpy as np
 # %% color space flags
-# flags = [i for i in dir(cv) if i.startswith('COLOR_')]
+flags = [i for i in dir(cv) if i.startswith('COLOR_')]
 # print(flags)
-# %% track blue object
-cap = cv.VideoCapture(cv.samples.findFile("images/blue_object.mp4"))
+
+
+# %% track blue green red object
+cap = cv.VideoCapture(cv.samples.findFile("images/console.mp4"))
 
 while(1):
     # Take each frame
@@ -18,10 +20,20 @@ while(1):
     # define range of blue color in HSV
     lower_blue = np.array([110,50,50])
     upper_blue = np.array([130,255,255])
-    # Threshold the HSV image to get only blue colors
-    mask = cv.inRange(hsv, lower_blue, upper_blue)
+    # define range of red color in HSV
+    lower_red = np.array([0,50,50])
+    upper_red = np.array([10,255,255])
+    # define range of green color in HSV
+    lower_green = np.array([50,50,50])
+    upper_green = np.array([70,255,255])
+    # Threshold the HSV image to get only certain colors
+    mask_blue = cv.inRange(hsv, lower_blue, upper_blue)
+    mask_red = cv.inRange(hsv, lower_red, upper_red)
+    mask_green = cv.inRange(hsv, lower_green, upper_green)
+    # Merge masks
+    mask=mask_blue+mask_green+mask_red
     # Bitwise-AND mask and original image
-    res = cv.bitwise_and(frame,frame, mask= mask)
+    res = cv.bitwise_and(frame,frame, mask=mask)
     cv.imshow('frame',frame)
     cv.imshow('mask',mask)
     cv.imshow('res',res)
