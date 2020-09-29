@@ -6,9 +6,13 @@ import numpy as np
 # print(flags)
 # %% track blue object
 cap = cv.VideoCapture(cv.samples.findFile("images/blue_object.mp4"))
+
 while(1):
     # Take each frame
     _, frame = cap.read()
+    if frame is None:
+        break
+    frame=cv.resize(frame,(800,600))
     # Convert BGR to HSV
     hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
     # define range of blue color in HSV
@@ -21,7 +25,7 @@ while(1):
     cv.imshow('frame',frame)
     cv.imshow('mask',mask)
     cv.imshow('res',res)
-    k = cv.waitKey(5) & 0xFF
+    k = cv.waitKey(20) & 0xFF
     if k == 27:
         break
 cv.destroyAllWindows()
