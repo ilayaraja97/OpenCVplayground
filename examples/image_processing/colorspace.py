@@ -7,7 +7,7 @@ flags = [i for i in dir(cv) if i.startswith('COLOR_')]
 
 
 # %% track blue green red object
-cap = cv.VideoCapture(cv.samples.findFile("images/console.mp4"))
+cap = cv.VideoCapture("http://192.168.1.4:4747/video")
 
 while(1):
     # Take each frame
@@ -31,7 +31,7 @@ while(1):
     mask_red = cv.inRange(hsv, lower_red, upper_red)
     mask_green = cv.inRange(hsv, lower_green, upper_green)
     # Merge masks
-    mask=mask_blue+mask_green+mask_red
+    mask=mask_red
     # Bitwise-AND mask and original image
     res = cv.bitwise_and(frame,frame, mask=mask)
     cv.imshow('frame',frame)
