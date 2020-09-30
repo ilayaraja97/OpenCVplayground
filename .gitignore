@@ -9,3 +9,4 @@ include
 *.mp4
 bin
 .ipynb_checkpoints
+.vscode
