@@ -7,7 +7,7 @@ flags = [i for i in dir(cv) if i.startswith('COLOR_')]
 
 
 # %% track blue green red object
-cap = cv.VideoCapture("http://192.168.1.4:4747/video")
+cap = cv.VideoCapture("http://192.168.1.120:4747/video")
 
 while(1):
     # Take each frame
