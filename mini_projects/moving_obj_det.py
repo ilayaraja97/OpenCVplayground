@@ -6,6 +6,8 @@ cv.namedWindow('image')
 
 _,prev_frame = cap.read()
 prev_frame=cv.cvtColor(prev_frame,cv.COLOR_BGR2GRAY)
+sub_model=cv.createBackgroundSubtractorMOG2() # createBackgroundSubtractorKNN()
+sub_model_mask=cv.createBackgroundSubtractorMOG2()
 
 while(1):
     # Take each frame
@@ -13,12 +15,11 @@ while(1):
     if img is None:
         break
     # img=cv.resize(img,(800,600))
-    img=cv.cvtColor(img,cv.COLOR_BGR2GRAY)
-    mask=np.absolute(img-prev_frame)
-    mask[mask<250]=0
-    # print(mask)
-    # res=cv.bitwise_and(img,img,mask=mask)
-    cv.imshow('image',mask)
+    # img=cv.cvtColor(img,cv.COLOR_BGR2GRAY)
+    mask=sub_model.apply(img)
+    mask=sub_model_mask.apply(mask)
+    res=cv.bitwise_and(img,img,mask=mask)
+    cv.imshow('image',res)
     prev_frame=img
     k = cv.waitKey(20) & 0xFF
     if k == 27:
