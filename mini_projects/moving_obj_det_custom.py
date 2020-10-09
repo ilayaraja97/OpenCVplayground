@@ -22,7 +22,7 @@ cv.namedWindow('res')
 
 def get_k_frames(k=5):
     p=[]
-    for i in range(k):
+    for _ in range(k):
         _,f = cap.read()
         f=cv.cvtColor(f,cv.COLOR_BGR2GRAY)
         p.extend([f])
