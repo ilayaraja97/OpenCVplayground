@@ -6,7 +6,7 @@ cv.namedWindow('image')
 
 _,prev_frame = cap.read()
 prev_frame=cv.cvtColor(prev_frame,cv.COLOR_BGR2GRAY)
-sub_model=cv.createBackgroundSubtractorMOG2() # createBackgroundSubtractorKNN()
+sub_model=cv.createBackgroundSubtractorMOG2(history=500,varThreshold=400) # createBackgroundSubtractorKNN()
 sub_model_mask=cv.createBackgroundSubtractorMOG2()
 
 while(1):
