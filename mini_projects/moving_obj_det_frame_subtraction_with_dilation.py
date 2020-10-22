@@ -70,4 +70,4 @@ while(1):
     if k == 27:
         break
 cap.release()
-cv.destroyAllWindows()
+cv.destroyAllWindows() 
